@@ -1,5 +1,5 @@
 ﻿<div class="modal-dialog modal-xl">
-    <div class="modal-content">
+    <div class="modal-content modal-content-fscreen">
       <div class="modal-header pt-1 pb-1 ps-2 pe-2">
 
         <h4 class="modal-title" id="myModalLabel"><span class="material-icons">info_outline</span>&nbsp;<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/adminchat','Chat owner')?> <?php $user = $chat->getChatOwner();  if ($user !== false) : ?>
@@ -27,9 +27,6 @@
                 <span class="badge bg-info fs12 me-1" <?php if ($subject->subject->color != '') : ?>style="background-color:#<?php echo htmlspecialchars($subject->subject->color)?>!important;" <?php endif;?> ><?php echo htmlspecialchars($subject->subject)?></span>
             <?php endforeach; ?>
         </div>
-
-
- <style>.modal-content { height: calc(100vh - 3rem); width: calc(80vw - 3rem); display: flex; flex-direction: column; }</style>
 
 <div class="modal-body pt-0 pb-0 pe-0 d-flex flex-column">
 
