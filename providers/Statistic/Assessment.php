@@ -93,7 +93,7 @@ class Assessment
         $filter = array(
             'limit' => false,
             'filter' => array('form_id' => $data['form_id']),
-            'filtergte' => array('ctime' => $params['filter']['filtergte']['time']),
+            'filtergte' => array('`lh_chat`.`time`' => $params['filter']['filtergte']['time']),
             'innerjoin' => array('lh_chat' => array('`lh_abstract_form_collected`.`chat_id`', '`lh_chat`.`id`')),
             'group' => '`lh_chat`.`user_id`',
         );
