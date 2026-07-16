@@ -18,6 +18,21 @@
         </select>
     </div>
 
+    <div class="form-group">
+        <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('lhcqa/module', 'Highlight options (JSON)'); ?></label>
+        <textarea name="highlight_options" class="form-control form-control-sm" rows="12"><?php echo htmlspecialchars(json_encode(isset($qa_options['highlight_options']) ? $qa_options['highlight_options'] : new stdClass(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)); ?></textarea>
+        <small class="text-muted">Example:</small>
+        <pre class="bg-light p-2 mt-1 rounded border" style="font-size:12px;">{
+    "qa_spelling_remarks": {
+        "add": "Grammar mistake",
+        "update": "Update Grammar mistake",
+        "remove": "Remove Grammar mistake"
+    }
+}</pre>
+        <small class="text-muted">Sample form field:</small>
+        <pre class="bg-light p-2 mt-1 rounded border" style="font-size:12px;">[[json_content{"type":"textarea","log_changes":true,"name":"qa_spelling_remarks","rows":"1"}]]</pre>
+    </div>
+
     <input type="submit" class="btn btn-secondary" name="StoreOptions" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons', 'Save'); ?>" />
 
 </form>

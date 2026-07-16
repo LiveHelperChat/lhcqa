@@ -45,9 +45,155 @@
             <?php endif; ?>
             <?php include(erLhcoreClassDesign::designtpl('lhchat/lists/msg_obj_list_admin.tpl.php'));?>
          </div>
+
+         <script>
+            var highlightOptions = <?php echo json_encode(!empty($highlight_options) ? $highlight_options : array()); ?>;
+
+            function buildPopoverContent(msg_id, chat_id) {
+                var types = ($('#msg-' + msg_id).attr('data-qa-quoted') || '');
+                var html = '';
+                for (var typeKey in highlightOptions) {
+                    if (highlightOptions.hasOwnProperty(typeKey)) {
+                        var opt = highlightOptions[typeKey];
+                        if (types.indexOf(typeKey + ',') !== -1) {
+                            html += '<a href="#" class="d-block qa-popover-action" data-qa-type="' + typeKey + '" data-qa-action="remove" data-qa-chat="' + chat_id + '"><i class="material-icons">&#xe5cd;</i>' + opt.remove + '</a>';
+                            html += '<a href="#" class="d-block mt-1 qa-popover-action" data-qa-type="' + typeKey + '" data-qa-action="update" data-qa-chat="' + chat_id + '"><i class="material-icons">&#xE244;</i>' + opt.update + '</a>';
+                        } else {
+                            html += '<a href="#" class="d-block qa-popover-action" data-qa-type="' + typeKey + '" data-qa-action="add" data-qa-chat="' + chat_id + '"><i class="material-icons">&#xE244;</i>' + opt.add + '</a>';
+                        }
+                    }
+                }
+                return html;
+            }
+
+            $('#preview-messages-'+<?php echo $chat->id?>+' > .message-row:not([qt])').on('mouseup',{chat_id:<?php echo $chat->id?>, that : lhinst}, function(e){
+
+                 selected = e.data.that.getSelectedText();
+
+                $('.popover-copy').popover('dispose');
+
+                if (selected.text.length && (e.data.that.selection === null || e.data.that.selection.text !== selected.text)) {
+
+                    e.data.that.selection = selected;
+
+                    var msg_id = $(this).attr('id').replace('msg-','');
+
+                    var quoteParams = {
+                        placement:'right',
+                        trigger:'manual',
+                        animation:false,
+                        sanitize: false,
+                        html:true,
+                        container:'#preview-messages-'+e.data.chat_id,
+                        template : '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body"></div></div>',
+                        content: buildPopoverContent(msg_id, e.data.chat_id)
+                    }
+                    
+                    var placement = typeof $(this).attr('id') !== 'undefined' ? '#preview-messages-'+e.data.chat_id+' > #msg-'+msg_id+' > .msg-body' : this;
+
+                    var containerPopover = $(placement);
+
+                    if (containerPopover.length == 0) return ;
+  
+                    containerPopover.popover(quoteParams).popover('show').addClass('popover-copy');
+
+                    $('.qa-popover-action').off('click').on('click', function(){
+                        var qaType = $(this).attr('data-qa-type');
+                        var qaAction = $(this).attr('data-qa-action');
+                        var msgRow = $('#msg-' + msg_id);
+
+ 
+                        if (qaAction === 'add') {
+                            var result = document.getElementById('qa-form-evaluate').contentWindow.addQuoteAction({
+                                type: qaType,
+                                chat_id: e.data.chat_id,
+                                msg_id: msg_id,
+                                text: lhinst.getSelectedTextPlain()
+                            }, 'add');
+                            if (result.bgClass) msgRow.addClass(result.bgClass);
+                            showQuoteBadge(msgRow, qaType, lhinst.getSelectedTextPlain());
+                            msgRow.attr('data-qa-quoted', (msgRow.attr('data-qa-quoted') || '') + qaType + ',');
+                        } else if (qaAction === 'remove') {
+                            var quotedTypes = (msgRow.attr('data-qa-quoted') || '');
+                            var result = document.getElementById('qa-form-evaluate').contentWindow.addQuoteAction({
+                                type: qaType,
+                                chat_id: e.data.chat_id,
+                                msg_id: msg_id,
+                                text: ''
+                            }, 'remove');
+                            if (result.bgClass) msgRow.removeClass(result.bgClass);
+                            hideQuoteBadge(msgRow, qaType);
+                            var types = quotedTypes.replace(qaType + ',', '');
+                            if (types) { msgRow.attr('data-qa-quoted', types); }
+                            else { msgRow.removeAttr('data-qa-quoted'); }
+                            $('.popover-copy').popover('dispose');
+                        } else if (qaAction === 'update') {
+                            document.getElementById('qa-form-evaluate').contentWindow.addQuoteAction({
+                                type: qaType,
+                                chat_id: e.data.chat_id,
+                                msg_id: msg_id,
+                                text: ''
+                            }, 'remove');
+                            var result = document.getElementById('qa-form-evaluate').contentWindow.addQuoteAction({
+                                type: qaType,
+                                chat_id: e.data.chat_id,
+                                msg_id: msg_id,
+                                text: lhinst.getSelectedTextPlain()
+                            }, 'add');
+                            if (result.bgClass) msgRow.addClass(result.bgClass);
+                            showQuoteBadge(msgRow, qaType, lhinst.getSelectedTextPlain());
+                            $('.popover-copy').popover('dispose');
+                        }
+                    });
+
+                    e.data.that.popoverShown = true;
+                    e.data.that.popoverShownNow = true;
+                } else {
+                    e.data.that.selection = null;
+                }
+            });
+        </script>
+
     </div>
+
     <div class="col-6 p-0 d-flex flex-column" style="min-height:0">
-        <iframe style="flex:1;border:0;overflow:auto" class="pb-2 w-100" src="<?php echo erLhcoreClassDesign::baseurl('form/fill')?>/<?php echo $form_id?>?chat_id=<?php echo $chat->id?>" ></iframe>
+        <script>
+            function showQuoteBadge(msgRow, type, text) {
+                var msgBody = msgRow.find('.msg-body');
+                if (!msgBody.length) return;
+                var badgesContainer = msgBody.find('.qa-quote-badges');
+                if (!badgesContainer.length) {
+                    badgesContainer = $('<div class="qa-quote-badges mt-1"></div>');
+                    msgBody.append(badgesContainer);
+                }
+                badgesContainer.find('[data-qa-badge-type="' + type + '"]').remove();
+                var badge = $('<span class="badge bg-warning text-dark me-1 mb-1" data-qa-badge-type="' + type + '"><i class="material-icons fs12 me-1">format_quote</i>' + $('<span>').text(text).html() + '</span>');
+                badgesContainer.append(badge);
+            }
+            function hideQuoteBadge(msgRow, type) {
+                var msgBody = msgRow.find('.msg-body');
+                if (!msgBody.length) return;
+                msgBody.find('[data-qa-badge-type="' + type + '"]').remove();
+                var badgesContainer = msgBody.find('.qa-quote-badges');
+                if (badgesContainer.length && !badgesContainer.children().length) {
+                    badgesContainer.remove();
+                }
+            }
+            function applyQuoteHighlights(quotes) {
+                if (!quotes || !quotes.length) return;
+                quotes.forEach(function(q) {
+                    var msgRow = $('#msg-' + q.msg_id);
+                    if (!msgRow.length) return;
+                    var quotedTypes = (msgRow.attr('data-qa-quoted') || '');
+                    if (quotedTypes.indexOf(q.type + ',') === -1) {
+                        if (q.bgClass) msgRow.addClass(q.bgClass);
+                        msgRow.attr('data-qa-quoted', quotedTypes + q.type + ',');
+                        if (q.text) showQuoteBadge(msgRow, q.type, q.text);
+                    }
+                });
+            }
+        </script>
+        <iframe id="qa-form-evaluate" style="flex:1;border:0;overflow:auto" class="pb-2 w-100" src="<?php echo erLhcoreClassDesign::baseurl('form/fill')?>/<?php echo $form_id?>?chat_id=<?php echo $chat->id?>" ></iframe>
     </div>
 </div>
 

@@ -16,6 +16,9 @@ if (isset($_POST['StoreOptions'])) {
         'form_id' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'int', array('min_range' => 0)
         ),
+        'highlight_options' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'
+        ),
     );
 
     $form = new ezcInputForm(INPUT_POST, $definition);
@@ -33,6 +36,15 @@ if (isset($_POST['StoreOptions'])) {
         $data['form_id'] = $selectedForm instanceof erLhAbstractModelForm ? (int)$selectedForm->id : 0;
     } else {
         $data['form_id'] = 0;
+    }
+
+    if ($form->hasValidData('highlight_options') && $form->highlight_options != '') {
+        $decoded = json_decode($form->highlight_options, true);
+        if (is_array($decoded)) {
+            $data['highlight_options'] = $decoded;
+        }
+    } else {
+        $data['highlight_options'] = array();
     }
 
     $qaOptions->explain = '';

@@ -9,6 +9,10 @@ class Assessment
         $qaOptions = \erLhcoreClassModelChatConfig::fetch('lhcqa_options');
         $data = (array)$qaOptions->data;
 
+        if (!isset($data['form_id']) || $data['form_id'] == 0) {
+            return;
+        }
+
         $filterAggregate = $params['filter']['filter'];
         $filterAggregate['filterin']['`lh_chat`.`user_id`'] = array_keys($params['filter']['user_list']);
         $filterAggregate['filter']['`lh_abstract_form_collected`.`form_id`'] = $data['form_id'];

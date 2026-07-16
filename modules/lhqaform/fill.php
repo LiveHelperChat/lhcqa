@@ -10,6 +10,7 @@ if ($chat instanceof erLhcoreClassModelChat && erLhcoreClassChat::hasAccessToRea
     $qaOptions = erLhcoreClassModelChatConfig::fetch('lhcqa_options');
     $data = (array)$qaOptions->data;
     $tpl->set('form_id', isset($data['form_id']) ? $data['form_id'] : 0);
+    $tpl->set('highlight_options', isset($data['highlight_options']) && is_array($data['highlight_options']) ? $data['highlight_options'] : array());
 
     echo $tpl->fetch();
 }

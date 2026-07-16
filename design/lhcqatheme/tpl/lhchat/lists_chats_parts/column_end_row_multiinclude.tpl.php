@@ -1,3 +1,4 @@
+<?php if (isset($qaFormId) && $qaFormId > 0) : ?>
 <?php if ($qaCanFill || $qaCanSeeDetailed) : ?>
 <td id="qa-score-<?php echo $chat->id;?>">
 <?php if (isset($chat->chat_variables_array['qa_chat_score']) && !$qaCanFillPrivate) : ?>
@@ -11,4 +12,5 @@
 <button onclick="lhc.revealModal({'url':WWW_DIR_JAVASCRIPT+'qaform/fill/<?php echo $chat->id?>'})" type="button" class="btn btn-xs <?php if (isset($chat->chat_variables_array['qa_chat_score'])) :?>bg-success-subtle<?php else : ?>bg-light<?php endif;?>"><?php if (isset($chat->chat_variables_array['qa_chat_score'])) :?><?php echo htmlspecialchars($chat->chat_variables_array['qa_chat_score']);?>%&nbsp;<?php endif;?>QA</button>
 <?php endif; ?>
 </td>
+<?php endif; ?>
 <?php endif; ?>
