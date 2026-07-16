@@ -1,0 +1,375 @@
+<div id="qa-form-{{chat_id}}" class="pb-2">
+    <table class="table table-bordered table-sm mb-0 fs12">
+        <tbody>
+        <tr>
+            <td style="width:30%" class="table-info fw-bold ">Assessed by: {args.form_collected.user.name_official__or__string__-} {args.form_collected.user__not_empty__at} {args.form_collected.ctime_front}{args.form_collected.content_array.lhc_field_changes.modifiers__not_empty__<br/>Modified by: }{args.form_collected.content_array.lhc_field_changes.modifiers}</td>
+            <td style="width:15%" class="text-center fw-bold table-info"><small>Classification</small></td>
+            <td style="width:25%" class="text-center fw-bold table-info"><small>Score</small></td>
+            <td style="width:30%" class="text-center fw-bold table-info"><small>Assessor's Remarks</small></td>
+        </tr>
+        <!-- QUALIFIERS -->
+        <tr>
+            <td colspan="2" class="fw-bold text-white bg-success">QUALIFIERS</td>
+            <td class="text-center fw-bold text-white bg-success qa-section-score" data-section="qualifiers">100%</td>
+            <td>[[json_content{"type":"hidden","name":"qualifiers_score","keep_hidden":true}]]</td>
+        </tr>
+        <tr><td colspan="4" style="height:3px;padding:0;border:0"></td></tr>
+        <tr>
+            <td>Integrity/Keep promises</td>
+            <td>
+                [[json_content{"type":"combobox","name":"qa_integrity","options":"yes___Yes#no___No","data-section":"qualifiers","data-max":"0","value":"yes","css_class":"qa-cls"}]]
+            </td>
+            <td class="text-center qa-row-score">100%</td>
+            <td>
+                [[json_content{"type":"textarea","log_changes":true,"name":"qa_integrity_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_integrity_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_integrity_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_integrity_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_integrity_remarks.modified_at__datef__Y-m-d H:i:s}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Negative NGR impact</td>
+            <td>
+                [[json_content{"type":"combobox","name":"qa_negative_ngr","options":"yes___Yes#no___No","data-section":"qualifiers","data-max":"0","value":"yes","css_class":"qa-cls"}]]
+            </td>
+            <td class="text-center qa-row-score">100%</td>
+            <td>
+                [[json_content{"type":"textarea","log_changes":true,"name":"qa_negative_ngr_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_negative_ngr_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_negative_ngr_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_negative_ngr_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_negative_ngr_remarks.modified_at__datef__Y-m-d H:i:s}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Confidentiality</td>
+            <td>
+                [[json_content{"type":"combobox","name":"qa_confidentiality","options":"yes___Yes#no___No","data-section":"qualifiers","data-max":"0","value":"yes","css_class":"qa-cls"}]]
+            </td>
+            <td class="text-center qa-row-score">100%</td>
+            <td>
+                [[json_content{"type":"textarea","log_changes":true,"name":"qa_confidentiality_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_confidentiality_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_confidentiality_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_confidentiality_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_confidentiality_remarks.modified_at__datef__Y-m-d H:i:s}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Behave efficiently/Passing the buck/Business reputation</td>
+            <td>
+                [[json_content{"type":"combobox","name":"qa_behave_efficiently","options":"yes___Yes#no___No","data-section":"qualifiers","data-max":"0","value":"yes","css_class":"qa-cls"}]]
+            </td>
+            <td class="text-center qa-row-score">100%</td>
+            <td>
+                [[json_content{"type":"textarea","log_changes":true,"name":"qa_behave_efficiently_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_behave_efficiently_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_behave_efficiently_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_behave_efficiently_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_behave_efficiently_remarks.modified_at__datef__Y-m-d H:i:s}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Accuracy/Knowledge</td>
+            <td>
+                [[json_content{"type":"combobox","name":"qa_accuracy","options":"yes___Yes#no___No","data-section":"qualifiers","data-max":"0","value":"yes","css_class":"qa-cls"}]]
+            </td>
+            <td class="text-center qa-row-score">100%</td>
+            <td>
+                [[json_content{"type":"textarea","name":"qa_accuracy_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_accuracy_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_accuracy_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_accuracy_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_accuracy_remarks.modified_at__datef__Y-m-d H:i:s}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Loading of information (notes)/Not reading notes</td>
+            <td>
+                [[json_content{"type":"combobox","name":"qa_loading_info","options":"yes___Yes#no___No","data-section":"qualifiers","data-max":"0","value":"yes","css_class":"qa-cls"}]]
+            </td>
+            <td class="text-center qa-row-score">100%</td>
+            <td>
+                [[json_content{"type":"textarea","log_changes":true,"name":"qa_loading_info_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_loading_info_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_loading_info_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_loading_info_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_loading_info_remarks.modified_at__datef__Y-m-d H:i:s}</span>
+            </td>
+        </tr>
+        <!-- CONNECT -->
+        <tr>
+            <td colspan="2" class="fw-bold text-white bg-success">Connect</td>
+            <td class="text-center fw-bold text-white bg-success qa-section-score" data-section="connect">100%</td>
+            <td>[[json_content{"type":"hidden","name":"connect_score","keep_hidden":true}]]</td>
+        </tr>
+        <tr>
+            <td>Greet, Meet and Maintain</td>
+            <td>[[json_content{"type":"combobox","name":"qa_greet_meet","options":"yes___Yes#no___No","data-section":"connect","data-max":"5","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">5%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_greet_meet_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_greet_meet_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_greet_meet_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_greet_meet_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_greet_meet_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <tr>
+            <td>Appropriate responsibility</td>
+            <td>[[json_content{"type":"combobox","name":"qa_responsibility","options":"yes___Yes#no___No","data-section":"connect","data-max":"5","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">5%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_responsibility_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_responsibility_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_responsibility_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_responsibility_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_responsibility_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <tr>
+            <td>Lead the contact/Positive attitude &amp; Expression/Educating the customer/Use of ordinary Words</td>
+            <td>[[json_content{"type":"combobox","name":"qa_lead_contact","options":"yes___Yes#no___No","data-section":"connect","data-max":"7","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">7%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_lead_contact_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_lead_contact_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_lead_contact_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_lead_contact_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_lead_contact_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <tr>
+            <td>Keep in touch <small class="text-muted">(30-60 seconds and up to 3 min required response time)</small></td>
+            <td>[[json_content{"type":"combobox","name":"qa_keep_in_touch","options":"yes___Yes#no___No","data-section":"connect","data-max":"5","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">5%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_keep_in_touch_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_keep_in_touch_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_keep_in_touch_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_keep_in_touch_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_keep_in_touch_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+
+        <!-- COMMUNICATION/WRITING -->
+        <tr>
+            <td colspan="2" class="fw-bold text-white bg-success">Communication/Writing</td>
+            <td class="text-center fw-bold text-white bg-success qa-section-score" data-section="communication">100%</td>
+            <td>[[json_content{"type":"hidden","name":"communication_score","keep_hidden":true}]]</td>
+        </tr>
+        <tr>
+            <td>Correct spelling/Grammar/Punctuation</td>
+            <td>[[json_content{"type":"combobox","name":"qa_spelling","options":"yes___Yes#no___No","data-section":"communication","data-max":"5","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">5%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_spelling_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_spelling_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_spelling_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_spelling_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_spelling_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <tr>
+            <td>Used correct template and amended (where applicable)/Language used</td>
+            <td>[[json_content{"type":"combobox","name":"qa_template","options":"yes___Yes#no___No","data-section":"communication","data-max":"6","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">6%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_template_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_template_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_template_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_template_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_template_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <!-- UNDERSTAND -->
+        <tr>
+            <td colspan="2" class="fw-bold text-white bg-success">Understand</td>
+            <td class="text-center fw-bold text-white bg-success qa-section-score" data-section="understand">100%</td>
+            <td>[[json_content{"type":"hidden","name":"understand_score","keep_hidden":true}]]</td>
+        </tr>
+        <tr>
+            <td>Understanding (mirror/summarize enquiry appropriately)</td>
+            <td>[[json_content{"type":"combobox","name":"qa_understanding","options":"yes___Yes#no___No","data-section":"understand","data-max":"7","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">7%</td>
+            <td>
+                [[json_content{"type":"textarea","log_changes":true,"name":"qa_understanding_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_understanding_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_understanding_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_understanding_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_understanding_remarks.modified_at__datef__Y-m-d H:i:s}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Empathy (assess customers needs and act accordingly)</td>
+            <td>[[json_content{"type":"combobox","name":"qa_empathy","options":"yes___Yes#no___No","data-section":"understand","data-max":"8","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">8%</td>
+            <td>
+                [[json_content{"type":"textarea","log_changes":true,"name":"qa_empathy_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_empathy_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_empathy_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_empathy_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_empathy_remarks.modified_at__datef__Y-m-d H:i:s}</span>
+            </td>
+        </tr>
+        <!-- RESOLVE -->
+        <tr>
+            <td colspan="2" class="fw-bold text-white bg-success">Resolve</td>
+            <td class="text-center fw-bold text-white bg-success qa-section-score" data-section="resolve">100%</td>
+            <td>[[json_content{"type":"hidden","name":"resolve_score","keep_hidden":true}]]</td>
+        </tr>
+        <tr>
+            <td>Holistic solution / answer offered.</td>
+            <td>[[json_content{"type":"combobox","name":"qa_holistic_solution","options":"yes___Yes#no___No","data-section":"resolve","data-max":"10","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">10%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_holistic_solution_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_holistic_solution_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_holistic_solution_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_holistic_solution_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_holistic_solution_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <tr>
+            <td>Promoting proactive solutions and follow up</td>
+            <td>[[json_content{"type":"combobox","name":"qa_proactive_solutions","options":"yes___Yes#no___No","data-section":"resolve","data-max":"15","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">15%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_proactive_solutions_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_proactive_solutions_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_proactive_solutions_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_proactive_solutions_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_proactive_solutions_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <tr>
+            <td>Confirmed resolution</td>
+            <td>[[json_content{"type":"combobox","name":"qa_confirmed_resolution","options":"yes___Yes#no___No","data-section":"resolve","data-max":"5","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">5%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_confirmed_resolution_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_confirmed_resolution_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_confirmed_resolution_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_confirmed_resolution_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_confirmed_resolution_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <!-- EXCELLENCE -->
+        <tr>
+            <td colspan="2" class="fw-bold text-white bg-success">Excellence</td>
+            <td class="text-center fw-bold text-white bg-success qa-section-score" data-section="excellence">100%</td>
+            <td>[[json_content{"type":"hidden","name":"excellence_score","keep_hidden":true}]]</td>
+        </tr>
+        <tr>
+            <td>Exceed</td>
+            <td>[[json_content{"type":"combobox","name":"qa_exceed","options":"yes___Yes#no___No","data-section":"excellence","data-max":"5","value":"no","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">5%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_exceed_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_exceed_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_exceed_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_exceed_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_exceed_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <!-- BE EFFICIENT -->
+        <tr>
+            <td colspan="2" class="fw-bold text-white bg-success">Be efficient</td>
+            <td class="text-center fw-bold text-white bg-success qa-section-score" data-section="efficient">100%</td>
+            <td>[[json_content{"type":"hidden","name":"efficient_score","keep_hidden":true}]]</td>
+        </tr>
+        <tr>
+            <td>Quality of response</td>
+            <td>[[json_content{"type":"combobox","name":"qa_quality_response","options":"yes___Yes#no___No","data-section":"efficient","data-max":"8","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">8%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_quality_response_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_quality_response_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_quality_response_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_quality_response_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_quality_response_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <tr>
+            <td>Product/Promotion knowledge/use</td>
+            <td>[[json_content{"type":"combobox","name":"qa_product_knowledge","options":"yes___Yes#no___No","data-section":"efficient","data-max":"6","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">6%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_product_knowledge_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_product_knowledge_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_product_knowledge_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_product_knowledge_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_product_knowledge_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <!-- WRAP UP -->
+        <tr>
+            <td colspan="2" class="fw-bold text-white bg-success">Wrap up</td>
+            <td class="text-center fw-bold text-white bg-success qa-section-score" data-section="wrapup">100%</td>
+            <td>[[json_content{"type":"hidden","name":"wrapup_score","keep_hidden":true}]]</td>
+        </tr>
+        <tr>
+            <td>Extra assistance offered</td>
+            <td>[[json_content{"type":"combobox","name":"qa_extra_assistance","options":"yes___Yes#no___No","data-section":"wrapup","data-max":"4","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">4%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_extra_assistance_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_extra_assistance_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_extra_assistance_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_extra_assistance_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_extra_assistance_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <tr>
+            <td>A warm good bye</td>
+            <td>[[json_content{"type":"combobox","name":"qa_warm_goodbye","options":"yes___Yes#no___No","data-section":"wrapup","data-max":"4","value":"yes","css_class":"qa-cls"}]]</td>
+            <td class="text-center qa-row-score">4%</td>
+            <td>[[json_content{"type":"textarea","log_changes":true,"name":"qa_warm_goodbye_remarks","rows":"1"}]]
+                <span class="fs12 fst-italic text-muted">{args.form_collected.content_array.lhc_field_changes.field_history.qa_warm_goodbye_remarks__not_empty__Modified by: <b>}{args.form_collected.content_array.lhc_field_changes.field_history.qa_warm_goodbye_remarks.user.name_official}{args.form_collected.content_array.lhc_field_changes.field_history.qa_warm_goodbye_remarks__not_empty__</b> at }{args.form_collected.content_array.lhc_field_changes.field_history.qa_warm_goodbye_remarks.modified_at__datef__Y-m-d H:i:s}</span></td>
+        </tr>
+        <!-- FOOTER -->
+        <tr>
+            <td></td>
+            <td class="text-center fw-bold text-white bg-secondary">Mark</td>
+            <td class="text-center fw-bold text-white bg-secondary" id="qa-mark-{{chat_id}}">100%</td>
+            <td rowspan="2">Chat escalated
+                [[json_content{"type":"combobox","name":"chat_escalated","options":"no___No#yes___Yes","value":"no"}]]
+                [[json_content{"type":"hidden","chat_attr":"chat_variable.qa_chat_score","name":"chat_score","form_attr":"attr_int_1","keep_hidden":true}]]
+                [[json_content{"type":"hidden","name":"mark_score","keep_hidden":true}]]
+                [[json_content{"type":"hidden","name":"quotes_remarks","keep_hidden":true}]]
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center fw-bold">Chat Score</td>
+            <td id="qa-total-{{chat_id}}" class="text-center fw-bold text-white bg-success">100%</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    (function(){
+        var chatId = '{{chat_id}}';
+        var form = document.getElementById('qa-form-' + chatId);
+        if (!form) return;
+        function scoreColor(earned, max) {
+            if (max === 0) return 'var(--bs-danger)';
+            var pct = earned / max;
+            if (pct >= 1) return 'var(--bs-success)';
+            if (pct <= 0) return 'var(--bs-danger)';
+            return 'var(--bs-warning)';
+        }
+        function recalc() {
+            var sections = {};
+            form.querySelectorAll('.qa-cls').forEach(function(sel) {
+                var sec = sel.dataset.section;
+                var max = parseInt(sel.dataset.max) || 0;
+                var val = sel.value;
+                var row = sel.closest('tr');
+                var scoreCell = row.querySelector('.qa-row-score');
+                if (!sections[sec]) sections[sec] = {earned: 0, total: 0, hasNo: false};
+                if (sec === 'qualifiers') {
+                    if (val === 'no') { sections[sec].hasNo = true; if (scoreCell) scoreCell.textContent = '0%'; }
+                    else { if (scoreCell) scoreCell.textContent = '100%'; }
+                } else {
+                    sections[sec].total += max;
+                    if (val === 'yes') { sections[sec].earned += max; if (scoreCell) scoreCell.textContent = max + '%'; }
+                    else if (val === 'no') { if (scoreCell) scoreCell.textContent = '0%'; }
+                    else if (val === 'na') { sections[sec].total -= max; if (scoreCell) scoreCell.textContent = 'N/A'; }
+                    else { if (scoreCell) scoreCell.textContent = max + '%'; }
+                }
+            });
+            form.querySelectorAll('.qa-section-score').forEach(function(el) {
+                var sec = el.dataset.section;
+                if (!sections[sec]) return;
+                if (sec === 'qualifiers') {
+                    var p = sections[sec].hasNo ? 0 : 100;
+                    document.getElementById('id_qualifiers_score').value = p;
+                    el.textContent = p + '%';
+                    el.style.setProperty('background', p > 0 ? 'var(--bs-success)' : 'var(--bs-danger)', 'important');
+                } else {
+                    var earned = sections[sec].earned, total = sections[sec].total;
+                    el.textContent = total > 0 ? Math.round(earned / total * 100) + '%' : '0%';
+                    el.style.setProperty('background', scoreColor(earned, total), 'important');
+                    document.getElementById('id_' + sec + '_score').value = total > 0 ? Math.round(earned / total * 100) : 0;
+                }
+            });
+            var totalEarned = 0, totalMax = 0;
+            for (var s in sections) {
+                if (s !== 'qualifiers') { totalEarned += sections[s].earned; totalMax += sections[s].total; }
+            }
+            var totalEl = document.getElementById('qa-total-' + chatId);
+            var markEl = document.getElementById('qa-mark-' + chatId);
+            var markScore = totalEarned;
+
+            var qualifiersPassed = !(sections['qualifiers'] && sections['qualifiers'].hasNo);
+            var chatScore = qualifiersPassed ? markScore : 0;
+            if (markEl) {
+                markEl.textContent = markScore + '%';
+                document.getElementById('id_mark_score').value = markScore;
+            }
+            if (totalEl) {
+                totalEl.textContent = chatScore + '%'; totalEl.style.setProperty('background', scoreColor(chatScore, 100), 'important');
+                document.getElementById('id_chat_score').value = chatScore;
+            }
+        }
+        form.addEventListener('change', recalc);
+        recalc();
+
+        function adjustHeight(el) {
+            el.style.height = 'auto';
+            el.style.height = (el.scrollHeight + 2) + 'px';
+        }
+
+        document.querySelectorAll('textarea.form-control').forEach(el => {
+            // 1. Add the listener for future input
+            el.addEventListener('input', () => adjustHeight(el));
+
+            // 2. Trigger immediately on page load
+            // We use setTimeout to ensure the browser has finished rendering the layout
+            setTimeout(() => adjustHeight(el), 0);
+        });
+
+    })();
+    var typeBgMap = {
+        "qa_spelling_remarks": "bg-danger rounded p-2"
+    };
+
+    function addQuoteAction(params, action) {
+        var field = document.getElementById('id_quotes_remarks');
+        var arr = [];
+        try { arr = JSON.parse(field.value || '[]'); } catch(e) { arr = []; }
+        var idx = arr.findIndex(function(item) { return item.msg_id == params.msg_id && item.type == params.type; });
+        if (action === 'remove' || idx !== -1) {
+            if (idx !== -1) arr.splice(idx, 1);
+            field.value = JSON.stringify(arr);
+            return { action: 'removed', type: params.type, msg_id: params.msg_id, bgClass: typeBgMap[params.type] || '' };
+        }
+        arr.push(params);
+        field.value = JSON.stringify(arr);
+        return { action: 'added', type: params.type, msg_id: params.msg_id, bgClass: typeBgMap[params.type] || '' };
+    }
+
+    var existing = [];
+    try { existing = JSON.parse(document.getElementById('id_quotes_remarks').value || '[]'); } catch(e) {}
+    if (existing.length && window.parent.applyQuoteHighlights) {
+        window.parent.applyQuoteHighlights(existing.map(function(item) {
+            item.bgClass = typeBgMap[item.type] || '';
+            return item;
+        }));
+    }
+
+</script>

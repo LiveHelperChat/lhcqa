@@ -1,4 +1,4 @@
-﻿<div class="modal-dialog modal-xl">
+<div class="modal-dialog modal-xl">
     <div class="modal-content modal-content-fscreen">
       <div class="modal-header pt-1 pb-1 ps-2 pe-2">
 
@@ -87,7 +87,7 @@
                         container:'#preview-messages-'+e.data.chat_id,
                         template : '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body"></div></div>',
                         content: buildPopoverContent(msg_id, e.data.chat_id)
-                    }
+                    };
                     
                     var placement = typeof $(this).attr('id') !== 'undefined' ? '#preview-messages-'+e.data.chat_id+' > #msg-'+msg_id+' > .msg-body' : this;
 
