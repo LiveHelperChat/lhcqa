@@ -33,7 +33,7 @@
 <div class="row flex-grow-1 m-0">
     <div class="col-6 d-flex flex-column p-0">
         <div id="preview-messages-<?php echo $chat->id?>" class="msgBlock-admin fs13" style="flex:1;overflow-y:auto;overflow-x:hidden; max-height: calc(100vh - 8rem);">
-            <?php $messages = array_reverse(erLhcoreClassModelmsg::getList(array('limit' => 100,'sort' => 'id DESC','filter' => array('chat_id' => $chat->id)))); ?>
+            <?php $messages = array_reverse(erLhcoreClassModelmsg::getList(array('filternotlikefields' => [['meta_msg' => '"debug":true'],['meta_msg' => '{"content":{"typing"'],['meta_msg' => '{"content":{"execute_js"']], 'limit' => 500,'sort' => 'id DESC','filter' => array('chat_id' => $chat->id)))); ?>
             <?php if (isset($keyword) && !empty($keyword)) : ?>
                 <?php foreach ($messages as $message) : ?>
                     <?php if (is_array($keyword)) : ?>
