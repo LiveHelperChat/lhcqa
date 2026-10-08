@@ -8,7 +8,7 @@ This extension adds Quality Assessment (QA) scoring for chat conversations in Li
 
 - **QA column in the chat list** — shows QA scores and allows filling/viewing QA evaluations directly from the chat list.
 - **Agent statistics integration** — displays per-agent "QA Score" (average %) and "QA Chats" (count of evaluated chats) in the agent statistic table and department performance widget.
-- **Settings page** — configure which internal form to use for QA evaluations.
+- **Settings page** — configure a default internal form for QA evaluations and assign **separate surveys per department**.
 - **Export support** — QA columns are included in XLS exports of agent statistics.
 
 ---
@@ -25,6 +25,33 @@ This extension adds Quality Assessment (QA) scoring for chat conversations in Li
 4. Create an **internal form** (Admin → Forms) that operators will use during QA evaluation. Add rating fields (e.g., stars, dropdowns, text areas) as needed. The form's `attr_int_1` field will be used as the QA score.
 
 5. Go to **System → QA Forms** (`/site_admin/qaform/settings`) and select the form you created.
+
+---
+
+## Per-department surveys
+
+The settings page supports a **default** QA survey (`form_id`) plus optional per-department overrides.
+
+- **Default survey** — the `Choose a form to use for QA` dropdown. Used for any chat whose department is not explicitly assigned to another survey.
+- **Per-department surveys** — one row per internal form: `[form name] | departments multi-select`. Every department listed in a row uses that form.
+
+Stored as:
+
+```php
+$data['form_id'] = <default_form_id>;
+$data['survey']  = array(
+    <form_id> => array(<dep_id>, <dep_id>, ...),
+    ...
+);
+```
+
+Resolution rules:
+
+1. If the chat's department is assigned to a survey, that survey is used.
+2. Otherwise the default survey (`form_id`) is used.
+3. If nothing is configured, the QA column is hidden.
+
+Agent statistics aggregate QA score/chats across **all** configured surveys (default + per-department).
 
 ---
 
@@ -74,12 +101,13 @@ With these permissions, the operator will:
 
 - See a **"QA" column** in the chat list.
 - See a **"QA" button** next to each chat in the list.
-- Clicking the button opens a **modal** with the chat conversation on the left and the QA evaluation form on the right.
-- After submission, the QA score is stored in the chat's `chat_variables` and displayed in the column.
-
----
-
-### 3. Configure QA settings (admin)
+- Clicking the button default internal form and optionally assigns per-department surveys via **QA Forms Settings**.
+2. When an operator fills the QA form for a chat:
+   - The survey is resolved from the chat's department (falling back to the default survey).
+   - The form submission is stored in `lh_abstract_form_collected`.
+   - The QA score (`attr_int_1` of the collected form) is saved to the chat's `chat_variables` as `qa_chat_score`.
+3. The chat list "QA" column reads `qa_chat_score` from chat variables.
+4. Agent statistics aggregate QA scores and chat counts per operator from `lh_abstract_form_collected` joined with `lh_chat`, across all configured surveys
 
 Give the operator:
 

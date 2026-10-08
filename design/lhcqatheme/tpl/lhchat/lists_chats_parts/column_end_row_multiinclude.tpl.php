@@ -1,4 +1,4 @@
-<?php if (isset($qaFormId) && $qaFormId > 0) : ?>
+<?php if (isset($qaHasForm) && $qaHasForm) : ?>
 <?php if ($qaCanFill || $qaCanSeeDetailed) : ?>
 <td id="qa-score-<?php echo $chat->id;?>">
 <?php if (isset($chat->chat_variables_array['qa_chat_score']) && !$qaCanFillPrivate) : ?>

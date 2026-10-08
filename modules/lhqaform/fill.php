@@ -4,12 +4,19 @@ $chatId = isset($Params['user_parameters']['chat_id']) ? (int)$Params['user_para
 $chat = $chatId > 0 ? erLhcoreClassModelChat::fetch($chatId) : false;
 
 if ($chat instanceof erLhcoreClassModelChat && erLhcoreClassChat::hasAccessToRead($chat)) {
+
+    $formId = \LiveHelperChatExtension\lhcqa\providers\Statistic\Assessment::getFormIdForChat($chat);
+
+    if ($formId <= 0) {
+        exit;
+    }
+
     $tpl = erLhcoreClassTemplate::getInstance('lhqaform/fill.tpl.php');
     $tpl->set('chat', $chat);
 
     $qaOptions = erLhcoreClassModelChatConfig::fetch('lhcqa_options');
     $data = (array)$qaOptions->data;
-    $tpl->set('form_id', isset($data['form_id']) ? $data['form_id'] : 0);
+    $tpl->set('form_id', $formId);
     $tpl->set('highlight_options', isset($data['highlight_options']) && is_array($data['highlight_options']) ? $data['highlight_options'] : array());
 
     echo $tpl->fetch();

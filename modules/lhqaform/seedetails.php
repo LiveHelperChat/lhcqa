@@ -10,15 +10,29 @@ if (!($chat instanceof erLhcoreClassModelChat) || !erLhcoreClassChat::hasAccessT
 $tpl = erLhcoreClassTemplate::getInstance('lhqaform/seedetails.tpl.php');
 $tpl->set('chat', $chat);
 
-$qaOptions = erLhcoreClassModelChatConfig::fetch('lhcqa_options');
-$data = (array)$qaOptions->data;
-$formId = isset($data['form_id']) ? (int)$data['form_id'] : 0;
+$formId = \LiveHelperChatExtension\lhcqa\providers\Statistic\Assessment::getFormIdForChat($chat);
 $tpl->set('form_id', $formId);
 
-$existingCollected = erLhAbstractModelFormCollected::findOne(array(
-    'filter' => array('form_id' => $formId, 'chat_id' => $chat->id),
-    'sort' => 'id DESC'
-));
+$existingCollected = false;
+
+if ($formId > 0) {
+    $existingCollected = erLhAbstractModelFormCollected::findOne(array(
+        'filter' => array('form_id' => $formId, 'chat_id' => $chat->id),
+        'sort' => 'id DESC'
+    ));
+}
+
+if (!($existingCollected instanceof erLhAbstractModelFormCollected)) {
+    $allFormIds = \LiveHelperChatExtension\lhcqa\providers\Statistic\Assessment::getAllFormIds();
+
+    if (!empty($allFormIds)) {
+        $existingCollected = erLhAbstractModelFormCollected::findOne(array(
+            'filter' => array('chat_id' => $chat->id),
+            'filterin' => array('form_id' => $allFormIds),
+            'sort' => 'id DESC'
+        ));
+    }
+}
 
 if ($existingCollected instanceof erLhAbstractModelFormCollected) {
     erLhcoreClassFormRenderer::setCollectedInformation($existingCollected->content_array);

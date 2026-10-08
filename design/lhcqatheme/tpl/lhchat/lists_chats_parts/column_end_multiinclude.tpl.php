@@ -1,5 +1,5 @@
-<?php $qaFormId = erLhcoreClassModelChatConfig::fetch('lhcqa_options')->data['form_id']; ?>
-<?php if ($qaFormId > 0) : ?>
+<?php $qaHasForm = \LiveHelperChatExtension\lhcqa\providers\Statistic\Assessment::hasAnyForm(); ?>
+<?php if ($qaHasForm) : ?>
 <?php if (!isset($qaCanFillPrivate)) : ?><?php
 $qaCanFillPrivate = erLhcoreClassUser::instance()->hasAccessTo('lhform', 'fill_private');
 $qaCanSeeDetailed = erLhcoreClassUser::instance()->hasAccessTo('lhqaform', 'see_detailed');

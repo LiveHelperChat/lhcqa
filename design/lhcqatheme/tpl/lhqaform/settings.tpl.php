@@ -19,6 +19,30 @@
     </div>
 
     <div class="form-group">
+        <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('lhcqa/module', 'Per-department surveys'); ?></label>
+        <small class="text-muted d-block mb-2"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('lhcqa/module', 'Assign a survey to specific departments. Departments without an assignment use the default survey above.'); ?></small>
+        <?php foreach ($forms as $formItem) : ?>
+            <div class="row mb-2 align-items-center">
+                <div class="col-md-4">
+                    <div class="form-control form-control-sm bg-light"><?php echo htmlspecialchars($formItem->name); ?></div>
+                </div>
+                <div class="col-md-8">
+                    <?php echo erLhcoreClassRenderHelper::renderMultiDropdown( array (
+                        'input_name'     => 'dep_ids_' . (int)$formItem->id . '[]',
+                        'optional_field' => erTranslationClassLhTranslation::getInstance()->getTranslation('lhcqa/module', 'Choose departments'),
+                        'selected_id'    => isset($qa_options['survey'][$formItem->id]) ? $qa_options['survey'][$formItem->id] : array(),
+                        'ajax'           => 'deps',
+                        'css_class'      => 'form-control',
+                        'display_name'   => 'name',
+                        'list_function_params' => array_merge(['sort' => '`name` ASC', 'limit' => 50], erLhcoreClassUserDep::conditionalDepartmentFilter()),
+                        'list_function'  => 'erLhcoreClassModelDepartament::getList'
+                    )); ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="form-group">
         <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('lhcqa/module', 'Highlight options (JSON)'); ?></label>
         <textarea name="highlight_options" class="form-control form-control-sm" rows="12"><?php echo htmlspecialchars(json_encode(isset($qa_options['highlight_options']) ? $qa_options['highlight_options'] : new stdClass(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)); ?></textarea>
         <small class="text-muted">Example:</small>
@@ -36,3 +60,9 @@
     <input type="submit" class="btn btn-secondary" name="StoreOptions" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons', 'Save'); ?>" />
 
 </form>
+
+<script>
+$(function() {
+    $('.btn-block-department').makeDropdown();
+});
+</script>

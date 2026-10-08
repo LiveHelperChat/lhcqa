@@ -1,5 +1,4 @@
-<?php $qaFormId = erLhcoreClassModelChatConfig::fetch('lhcqa_options')->data['form_id']; ?>
-<?php if ($qaFormId > 0) : ?>
+<?php if (\LiveHelperChatExtension\lhcqa\providers\Statistic\Assessment::hasAnyForm()) : ?>
 <td>
     <?php echo htmlspecialchars($agentStatistic_avg['qaScore'])?> %
 </td>
