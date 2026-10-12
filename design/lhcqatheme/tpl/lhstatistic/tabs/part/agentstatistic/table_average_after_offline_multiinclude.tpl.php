@@ -1,6 +1,6 @@
 <?php if (\LiveHelperChatExtension\lhcqa\providers\Statistic\Assessment::hasAnyForm()) : ?>
 <td>
-    <?php echo htmlspecialchars($agentStatistic_avg['qaScore'])?> %
+    <?php echo htmlspecialchars((int)round($agentStatistic_avg['qaScore']))?> %
 </td>
 <td>
     <?php echo htmlspecialchars($agentStatistic_avg['qaChats'])?>

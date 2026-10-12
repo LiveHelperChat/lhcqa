@@ -1,7 +1,7 @@
 <?php if (\LiveHelperChatExtension\lhcqa\providers\Statistic\Assessment::hasAnyForm()) : ?>
 <td nowrap>
     <?php if ($info->qaChats > 0) : ?>
-        <a href="<?php echo erLhcoreClassDesign::baseurl('form/collected')?>/<?php echo (int)$info->qaFormId?>/(chat_time)/1<?php echo isset($input) ? erLhcoreClassSearchHandler::getURLAppendFromInput($input,false,array('user_ids')) : ''?>/(user_ids)/<?php echo $info->userId?>"><?php echo $info->qaScore;?> %</a>
+        <a href="<?php echo erLhcoreClassDesign::baseurl('form/collected')?>/<?php echo (int)$info->qaFormId?>/(chat_time)/1<?php echo isset($input) ? erLhcoreClassSearchHandler::getURLAppendFromInput($input,false,array('user_ids')) : ''?>/(user_ids)/<?php echo $info->userId?>"><?php echo (int)round($info->qaScore);?> %</a>
     <?php else : ?>
         n/a
     <?php endif;?>
